@@ -11,6 +11,7 @@ const Menu = () => {
 
     const [showIndex, setShowIndex] = useState(null);
 
+
     const categories = menuData?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => {
         return c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     });

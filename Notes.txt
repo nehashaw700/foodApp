@@ -133,104 +133,166 @@ when a component is Controlled by parent
 
 REACT INTERVIEW TOPICS:
 
-* Diff btw useState and useRef? when to chose what?
-* state vs props
-* Controlled and UnControlled Component
-* useState, useRef, useMemo, useEffect, custom Hooks
-* Redux flow(strore --> action --> reducer)
-* why redux over context
-* React Router (protected routes, dynamic routing)
-* limitations of react in building large scale application
-* virtual dom, 
-* can react hooks fully replace redux for state management. why or why not?
-* best practices for managing state in large apps?
-*  How would you optimize performance in a React app with large component trees?
-* Code splitting, lazy loading, tree shaking
-* Component Lifecycle
-* Memoization
-* REST API and HTTP methods
+1. Diff btw useState and useRef? when to chose what?
+    useState ad useRef both persists between re-renders but useRef doesn't render UI automatically when a useRef var is updated.
+    useRef: can be updated directly
+    useState: use Setters to update
 
-6. Explain React's Strict Mode and its impact on development.
+    useRef is for:
+    1. Storing DOM elements
+    2. Storing mutable values without re-render
+    3. Accesing previous values
+    4. Avoiding Stale Closures
 
-7. How can you prevent unnecessary re-renders in React functional components?
+    should not useRef 
+    1. as replacement for state variables
+    2. For UI/ derived data
 
-8. Describe the key differences between functional and class components in React.
+2. state vs props: both re-renders when changed. 
+    state is mutable via setters. props not once received by child component
+    props are some data/properties passed from parent to child component to show data
+    state vars are hooks in React, which syncs the data layer with the UI layer.
 
-9. What is the significance of the React Fiber architecture?
+3. Controlled and UnControlled Component
+    Controlled: one which form-data/ behavior is controlled by React Component. we use useState hooks()
+    UnControlled: stores form-data inside DOM. uses useRef()
 
-10. How does React handle side effects, and how can you manage them effectively?
+4. useState, useRef, useMemo, useEffect, useCallback, custom Hooks
+   useEffect: A hook in React enables the execution of side effects within functional components, such as fetching data, managing subscriptions, or directly interacting with the DOM. It serves as a substitute for lifecycle methods found in class components like componentDidMount, componentDidUpdate, and componentWillUnmount. 
+   Will atleast run once when the component mounts
 
-11. Explain the differences between `useMemo()` and `useCallback()` in React.
+   Stale closures: when function remembers old data and never gets updated value. its kind of stuck in the past. 
+ 
+   useMemo: 
+   ✔ Expensive calculations
+    ✔ Derived data
+    ✔ Preventing recalculation on every render
 
-12. How would you implement dynamic form handling and validation in React?
+    Memoization: storing the result of an expensive function call in cache and returning it when same input is passed.Prevents recomputing and speed up the programs.
 
-13. What is lazy loading in React, and how does it improve application performance?
+    const filteredUsers = useMemo(() => {
+        return users.filter(u => u.active);
+    }, [users]);
 
-14. How would you handle errors in a React app, and what is the role of error boundaries?
+    useCallbacks: Memoizes functions and returns a stable function reference.
 
-15. What are the benefits of server-side rendering (SSR) in React applications?
+    useMemo and useCallback optimize performance
 
-16. How do you handle styling in React components? Discuss different approaches.
+    High-Level Render Flow
 
-17. How would you pass data between sibling components in React without using Redux?
+    Whenever a component renders:
 
-18. Explain the use case of `useEffect()` for fetching data from an API.
+    1️⃣ React calls the component function
+    2️⃣ Hooks run top → bottom3️⃣ JSX is returned
+    4️⃣ DOM is updated
+    5️⃣ Effects run (after render)
 
-19. How do you handle asynchronous operations in React using `async/await` or Promises?
+5. virtual dom and reconciliation in REACT 
 
-20. How would you re-render a component when the window is resized?
+6. limitations of react in building large scale application
+    React is a UI Library not a full framework. for many things like routing, state management (REDUX), form validation we need to use third-party libraries.
+    For performance, we need to use bundlers, code-splitting, tree shaking.
+    State management is diff with deeply nested components. if not managed properly, can lead to unnecessary renders.
 
-21. Describe how React Context API can be used for state management in an app.
+7. React Router (protected routes, dynamic routing)
+9. best practices for managing state in large apps?
+10. How would you optimize performance in a React app with large component trees?
+11. Code splitting, lazy loading, tree shaking
+12. Component Lifecycle
+13. Memoization
 
-25. Explain the difference between shallow and deep comparison in React's `shouldComponentUpdate`.
+14. Explain React's Strict Mode and its impact on development.
+    re-renders twice. runs side effects twice // happens to cleanup sideEffects
+    this is dev only. doesn't happen in prod
+    detects unsafe lifecycle method -> componentWillMount, componentWillUpdate
 
-26. How do you handle asynchronous code execution and state updates in React?
+15. How can you prevent unnecessary re-renders in React functional components? -
+    - React.Memo, useCallback, useMemo,
+    - Keep state local
+    - Avoid Storing Derived State
+    - Use correct keys in iteration
 
-28. What are higher-order components (HOCs) in React, and how are they used?
+16. Describe the key differences between functional and class components in React.
 
-30. Explain React's reconciliation process and how it updates the DOM efficiently. 
+17. What is the significance of the React Fiber architecture?
 
-1. Why does useEffect run twice on initial render in development? (Hint: React Strict Mode)
+18. How does React handle side effects, and how can you manage them effectively?
 
-2. What’s the difference between useEffect(() => {}, []) and useEffect(() => {}, [state]) if state never changes?
+19. Explain the differences between `useMemo()` and `useCallback()` in React.
 
-3. Why might a component using React.memo still re-render? (Hint: referential equality)
+20. How would you implement dynamic form handling and validation in React?
 
-4. Can useState updates be batched outside of event handlers? Why or why not?
+21. What is lazy loading in React, and how does it improve application performance?
 
-5. What happens if you call a hook inside a conditional or a loop? Why exactly is it wrong?
+22. How would you handle errors in a React app, and what is the role of error boundaries? 
 
-6. How does useCallback help with React.memo and when does it become useless overhead?
+23. What are the benefits of server-side rendering (SSR) in React applications?
 
-7. What is the difference between useRef and useState when storing a mutable value?
+24. How do you handle styling in React components? Discuss different approaches.
 
-8. Why is using setInterval inside useEffect tricky? What must you do to access latest state?
+25. How would you pass data between sibling components in React without using Redux?
 
-9. How can stale closures affect your useEffect or setTimeout calls?
+26. Explain the use case of `useEffect()` for fetching data from an API.
 
-10. Why might passing a function prop like onClick​={() => doSomething()} break memoization?
+27. How do you handle asynchronous operations in React using `async/await` or Promises?
 
-11. When does a component re-render even if state/props haven’t changed?
+28. How would you re-render a component when the window is resized?
 
-12. Why doesn't useEffect fire when a deeply nested object inside state changes?
+29. Describe how React Context API can be used for state management in an app. //
 
-13. What’s the actual difference between useEffect and useLayoutEffect in terms of timing?
+30. Explain the difference between shallow and deep comparison in React's `shouldComponentUpdate`.
 
-14. How would you persist state across component unmounts without using Redux or context?
+31. How do you handle asynchronous code execution and state updates in React?
 
-15. Can a useEffect cleanup function run after every render? When?
+32. What are higher-order components (HOCs) in React, and how are they used?
 
-16. What’s the best way to debounce a value using hooks?
+33. Explain React's reconciliation process and how it updates the DOM efficiently. 
 
-17. Why is using index as key in a list sometimes dangerous? Can you give a practical example?
+34. Why does useEffect run twice on initial render in development? (Hint: React Strict Mode)
 
-18. What are the risks of using derived state in React?
+35. What’s the difference between useEffect(() => {}, []) and useEffect(() => {}, [state]) if state never changes?
 
-19. How do you detect if a component is still mounted before calling setState in an async operation?
+36. Why might a component using React.memo still re-render? (Hint: referential equality)
+
+37. Can useState updates be batched outside of event handlers? Why or why not?
+
+38. What happens if you call a hook inside a conditional or a loop? Why exactly is it wrong?
+
+39. How does useCallback help with React.memo and when does it become useless overhead?
+
+40. What is the difference between useRef and useState when storing a mutable value?
+
+41. Why is using setInterval inside useEffect tricky? What must you do to access latest state?
+
+42. How can stale closures affect your useEffect or setTimeout calls?
+
+43. Why might passing a function prop like onClick​={() => doSomething()} break memoization?
+
+44. When does a component re-render even if state/props haven’t changed?
+
+45. Why doesn't useEffect fire when a deeply nested object inside state changes?
+
+46. What’s the actual difference between useEffect and useLayoutEffect in terms of timing?
+
+47. How would you persist state across component unmounts without using Redux or context?
+
+48. Can a useEffect cleanup function run after every render? When?
+
+49. What’s the best way to debounce a value using hooks?
+
+50. Why is using index as key in a list sometimes dangerous? Can you give a practical example?
+
+51. What are the risks of using derived state in React?
+
+52. How do you detect if a component is still mounted before calling setState in an async operation?
+
+53. REST API and HTTP methods can react hooks fully replace redux for state management. why or why not? //
+54. can react hooks fully replace redux for state management. why or why not? //
+55. Redux flow(strore --> action --> reducer)
+56. why redux over context
 
 
 JavaScript Coding (MOST ASKED)
-
 1️⃣ Implement debounce() from scratch
 2️⃣ Implement throttle() from scratch
 3️⃣ Flatten a deeply nested array and object both
@@ -247,7 +309,6 @@ JavaScript Coding (MOST ASKED)
 👉 sum(10)(20)(30)(40)(50)(60)() → 210
 
 🔹 React Coding (Live Round Favorites)
-
 • Build a counter with start / pause / reset
 • Create a search filter with debouncing
 • Implement controlled vs uncontrolled input
@@ -256,12 +317,11 @@ JavaScript Coding (MOST ASKED)
 • Render a dynamic form from JSON
 • Prevent unnecessary re-renders in a component
 • Implement lazy loading manually
+• Implement infinite scrolling
 
 🔹 DOM & Browser Coding
-
 • Event delegation implementation
 • Build a modal from scratch (no libraries)
-• Implement infinite scrolling
 • Drag & drop , dropdown using vanilla JS
 • Detect click outside an element
 

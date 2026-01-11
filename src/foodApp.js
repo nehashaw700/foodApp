@@ -5,13 +5,14 @@ import Body from "./components/Body";
 // import About from "./components/About.js";
 import Error from "./components/Error.js";
 import Menu from "./components/Menu.js";
+import ProtectedRoute from "./components/ProtectedRoute.js";
 
 import {
   createBrowserRouter,
   RouterProvider, Outlet
 } from "react-router-dom";
 import { lazy } from "react";
-
+ 
 // called dynamic import
 const About = lazy(() => import("./components/About.js"));
 
@@ -33,7 +34,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <ProtectedRoute> <Body /> </ProtectedRoute>,
       },
       {
         path: "/about",

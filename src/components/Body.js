@@ -15,7 +15,8 @@ const Body = () => {
   // if [listOfRes], called everytime when listOfRes changes
   useEffect(() => {
     fetchData();
-
+    
+    console.log("UseEffect called")
     // called when unmounting the component
     return () =>{
 
@@ -58,6 +59,8 @@ const Body = () => {
               rating={res?.info.avgRating}
               image={res?.info.cloudinaryImageId}
             />
+
+            {console.log("Body rendered")}
 
             </Link>
           )
