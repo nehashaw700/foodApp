@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nehashaw700/react_course.git"
+    "url": "git+https://github.com/nehashaw700/foodApp.git"
   },
   "keywords": [
     "react",
-    "react_course"
+    "foodApp"
   ],
   "author": "Neha Shaw",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nehashaw700/react_course/issues"
+    "url": "https://github.com/nehashaw700/foodApp/issues"
   },
-  "homepage": "https://github.com/nehashaw700/react_course#readme",
+  "homepage": "https://github.com/nehashaw700/foodApp#readme",
   "devDependencies": {
     "parcel": "^2.16.0"
   },
